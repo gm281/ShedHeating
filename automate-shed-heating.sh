@@ -67,6 +67,10 @@ function heat() {
     done
 }
 
+if (( $(echo "${HEATING_TEMPERATURE_DELTA} > ${OVERHEAT_TEMPERATURE_DELTA}" | bc -l) )); then
+    fatal "HEATING_TEMPERATURE_DELTA: ${HEATING_TEMPERATURE_DELTA} musn't be bigger than OVERHEAT_TEMPERATURE_DELTA: ${OVERHEAT_TEMPERATURE_DELTA}"
+fi
+
 while true; do
     log "$(date)"
     needs_heating=$(needs_heating)
